@@ -1,0 +1,51 @@
+﻿<Window x:Class="Ex3_BaseConverter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ex3_BaseConverter"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Base Converter" Height="200" Width="320">
+    <Grid>
+        <TextBox x:Name="sourceNumberTextBox" HorizontalAlignment="Left" Margin="73,12,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="targetNumberTextBox" HorizontalAlignment="Left" Margin="73,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="sourseBaseCompoBox" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="58">
+            <!--<sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+            <sys:Int32>4</sys:Int32>
+            <sys:Int32>5</sys:Int32>
+            <sys:Int32>6</sys:Int32>
+            <sys:Int32>7</sys:Int32>
+            <sys:Int32>8</sys:Int32>
+            <sys:Int32>9</sys:Int32>-->
+            <sys:Int32>10</sys:Int32>
+            <!--<sys:Int32>11</sys:Int32>
+            <sys:Int32>12</sys:Int32>
+            <sys:Int32>13</sys:Int32>
+            <sys:Int32>14</sys:Int32>
+            <sys:Int32>15</sys:Int32>
+            <sys:Int32>16</sys:Int32>-->
+
+        </ComboBox>
+        <ComboBox x:Name="targetBaseCompoBox" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="58">
+            <sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+            <sys:Int32>4</sys:Int32>
+            <sys:Int32>5</sys:Int32>
+            <sys:Int32>6</sys:Int32>
+            <sys:Int32>7</sys:Int32>
+            <sys:Int32>8</sys:Int32>
+            <sys:Int32>9</sys:Int32>
+            <sys:Int32>10</sys:Int32>
+            <sys:Int32>11</sys:Int32>
+            <sys:Int32>12</sys:Int32>
+            <sys:Int32>13</sys:Int32>
+            <sys:Int32>14</sys:Int32>
+            <sys:Int32>15</sys:Int32>
+            <sys:Int32>16</sys:Int32>
+        </ComboBox>
+        <Button Content="Convert" HorizontalAlignment="Left" Margin="208,12,0,0" VerticalAlignment="Top" Width="64" Click="Button_Click"/>
+
+    </Grid>
+</Window>
