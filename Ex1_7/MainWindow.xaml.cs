@@ -34,7 +34,7 @@ namespace Ex1_7
 
             try
             {
-                number = double.Parse(text);
+                number = double.Parse(text, NumberStyles.Number, CultureInfo.InvariantCulture);
                 statusLabel.Background = new SolidColorBrush(Color.FromArgb(100, 38, 127, 0));
                 statusLabel.Content = "OK";
             }
