@@ -87,17 +87,17 @@ namespace Ex1
             Console.WriteLine("Hello, CFU");
             Console.WriteLine();
 
-            ImplicitConversionExample();   // Пункт 1.
+            ImplicitConversionExample();      // Пункт 1.
 
-            ExplicitConversionExample();   // Пункт 2.
+            ExplicitConversionExample();      // Пункт 2.
 
-            ConversionExceptionsExample(); // Пункт 3.
+            ConversionExceptionsExample();    // Пункт 3.
 
-            SafeCastExample();             // Пункт 4.
+            SafeCastExample();                // Пункт 4.
 
-            UserImplicitExplicitConvertion();      // Пункт 5.
+            UserImplicitExplicitConvertion(); // Пункт 5.
 
-            ConvertParsTryParse();         // Пункт 6.
+            ConvertParsTryParse();            // Пункт 6.
         }
 
         /// <summary>

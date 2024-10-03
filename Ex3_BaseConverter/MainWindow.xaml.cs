@@ -72,8 +72,8 @@ namespace Ex3_BaseConverter
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string number = sourceNumberTextBox.Text;
-            int sourceBase = (int) sourseBaseCompoBox.SelectedItem;
-            int targetBase = (int) targetBaseCompoBox.SelectedItem;
+            int sourceBase = (int)sourseBaseCompoBox.SelectedItem;
+            int targetBase = (int)targetBaseCompoBox.SelectedItem;
 
             targetNumberTextBox.Text = ConverNumberBase(number, sourceBase, targetBase);
         }

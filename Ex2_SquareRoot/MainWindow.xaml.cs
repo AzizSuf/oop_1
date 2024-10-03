@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,18 +47,12 @@ namespace Ex2_SquareRoot
 
         }
 
-        /// <summary>
-        /// Вычисляет квадратный корень с помощью библиотеки .NET Math.
-        /// Вычисляет квадратный корень с помощью метода Ньютона.
-        /// Отображает информацию на окне.
-        /// </summary>
-        /// <param name="inEps">Точность расчета квадратоного корня методом Ньютона</param>
-        private void CalcSquareRoots(decimal inEps)
+        private void uiProcess(decimal eps)
         {
             iterationsRichTextBox.Document.Blocks.Clear();
             double number = 0;
 
-            if (!double.TryParse(numberTextBox.Text, out number))
+            if (!double.TryParse(numberTextBox.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out number))
             {
                 MessageBox.Show("Invalid input format!");
                 return;
@@ -65,45 +60,91 @@ namespace Ex2_SquareRoot
             if (number < 0)
             {
                 MessageBox.Show("The number must not be negative!");
+                return;
             }
 
             double netRoot = Math.Sqrt(number);
             resultDotNetLabel.Content = netRoot.ToString();
 
-            decimal numberD = decimal.Parse(numberTextBox.Text);
-            decimal newtonRoot = numberD / 2.0m;
+            decimal numberD = Convert.ToDecimal(number);
+
+            int i = 0;
+            decimal rootResult = 0.0m;
+            foreach (decimal root in CalcSquareRootYield(numberD, eps))
+            {
+                iterationsRichTextBox.AppendText($"iter: {i},  value: {root}\r");
+                i++;
+                rootResult = root;
+            }
+
+            resultNewtonLabel.Content = rootResult.ToString();
+            diffLabel.Content = Math.Abs((decimal)netRoot - rootResult).ToString();
+
+        }
+
+        /// <summary>
+        /// Вычисляет квадратный корень с помощью метода Ньютона.
+        /// </summary>
+        /// <param name="number">Входное число</param>
+        /// <param name="eps">Точность расчета</param>
+        /// <returns>Значение в decimal</returns>
+        private decimal CalcSquareRoot(decimal number, decimal eps)
+        {
+            decimal newtonRoot = number / 2.0m;
 
             decimal prevNewtonRoot = 0;
-            decimal eps = inEps;
 
             int i = 0;
             while (Math.Abs(newtonRoot - prevNewtonRoot) > eps && (i < ITERATIONS_LIMIT))
             {
-                iterationsRichTextBox.AppendText($"iter: {i},  value: {newtonRoot}\r");
                 prevNewtonRoot = newtonRoot;
 
-                newtonRoot = (numberD / newtonRoot + newtonRoot) / 2;
+                newtonRoot = (number / newtonRoot + newtonRoot) / 2;
 
                 i++;
             }
-            iterationsRichTextBox.AppendText($"iter: {i},  value: {newtonRoot}\r");
-
-            resultNewtonLabel.Content = newtonRoot.ToString();
-            diffLabel.Content = Math.Abs((decimal)netRoot - newtonRoot).ToString();
+            
+            return newtonRoot;
         }
 
         /// <summary>
-        /// Обработчик кнопки.
+        /// Вычисляет квадратный корень с помощью метода Ньютона.
+        /// </summary>
+        /// <param name="number">Входное число</param>
+        /// <param name="eps">Точность расчета</param>
+        /// <returns>Итератор</returns>
+        private IEnumerable<decimal> CalcSquareRootYield(decimal number, decimal eps)
+        {
+            decimal newtonRoot = number / 2.0m;
+
+            decimal prevNewtonRoot = 0;
+
+            int i = 0;
+            while (Math.Abs(newtonRoot - prevNewtonRoot) > eps && (i < ITERATIONS_LIMIT))
+            {
+                prevNewtonRoot = newtonRoot;
+
+                newtonRoot = (number / newtonRoot + newtonRoot) / 2;
+
+                i++;
+                yield return newtonRoot;
+            }
+
+            yield break;
+        }
+
+        /// <summary>
+        /// Обработчик кнопки расчета с максимально возможной точностью.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void fullButton_Click(object sender, RoutedEventArgs e)
         {
-            CalcSquareRoots(0.0m);
+            uiProcess(0.0m);
         }
 
         /// <summary>
-        /// Обработчик кнопки.
+        /// Обработчик кнопки расчета с заданной точностью.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -111,7 +152,7 @@ namespace Ex2_SquareRoot
         {
             decimal eps;
 
-            if (!decimal.TryParse(epsilonTextBox.Text, out eps))
+            if (!decimal.TryParse(epsilonTextBox.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out eps))
             {
                 MessageBox.Show("Invalid input format!");
                 return;
@@ -122,8 +163,7 @@ namespace Ex2_SquareRoot
                 MessageBox.Show("The eps must not be negative!");
             }
 
-            CalcSquareRoots(eps);
+            uiProcess(eps);
         }
-
     }
 }
