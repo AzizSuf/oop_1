@@ -285,8 +285,8 @@ namespace Ex1
             int number = int.Parse(text);  // Тут может вылетить исключение!
 
             text = "5656";
-            bool status = int.TryParse(text, out number);
-            Console.WriteLine(status);
+            bool status = int.TryParse(text, out var number2);
+            Console.WriteLine(number2);
         }
     }
 

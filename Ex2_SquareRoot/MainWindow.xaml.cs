@@ -44,7 +44,6 @@ namespace Ex2_SquareRoot
             epsilonTextBox.Text = "0";
             diffLabel.Content = "0.0";
             iterationsRichTextBox.Document.Blocks.Clear();
-
         }
 
         private void uiProcess(decimal eps)
